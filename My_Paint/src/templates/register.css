@@ -1,0 +1,80 @@
+* {box-sizing: border-box}
+html {
+    background-image: url('https://gas-kvas.com/uploads/posts/2023-02/1675453707_gas-kvas-com-p-fonovii-risunok-derevo-6.jpg'); /* Фоновый цвет и фоновый рисунок*/
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+body {
+	color: #fff; /*Цвет текста на странице*/
+}
+
+
+  .bg-image {
+    background-image: url("E:\My_Paint\src\static\fon.jpg"); /* Фоновый цвет и фоновый рисунок*/
+    background-size: cover;
+}
+
+
+/* Add padding to containers */
+.container {
+  width:500px;
+  margin: 0 auto;
+  border-radius: 5px;
+
+  padding-left: 16px;
+  padding-right: 16px;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit/register button */
+.registerbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity:1;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}

@@ -1,12 +1,14 @@
 from sqlalchemy import Table, Column, Integer, String, TIMESTAMP, MetaData, ForeignKey
 
+from src.auth.models import user
+
 metadata = MetaData()
 
-operation = Table(
-    "operation",
+picture = Table(
+    "picture",
     metadata,
     Column("id", Integer, primary_key=True),
-    Column("id_user", Integer, ForeignKey('user.id', ondelete='CASCADE'),),
+    Column("id_user", Integer,ForeignKey(user.c.id)),
     Column("date", TIMESTAMP),
-    Column("image", String),
+    Column("image_address", String),
 )

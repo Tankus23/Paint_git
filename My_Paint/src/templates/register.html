@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-  <link href="register.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', path='register.css') }}">
 </head>
-<body class=”bg-image”>
+<body >
 <form>
   <div class="container">
     <h1>Регистрация</h1>
@@ -14,6 +14,9 @@
 
     <label><b>Email</b></label>
     <input type="text" placeholder="Введите Email" name="email" required>
+
+    <label><b>Имя пользователя</b></label>
+    <input type="text" placeholder="Введите имя пользователя" name="email" required>
 
     <label><b>Пароль</b></label>
     <input type="password" placeholder="Введите пароль" name="psw" required>
@@ -24,7 +27,7 @@
 
     <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
     <button type="submit" class="registerbtn">Регистрировать</button>
-    <p>Уже есть аккаунт? <a href="login.html">Войти</a>.</p><br>
+    <p>Уже есть аккаунт? <a href="{{ '/pages/auth' }}">Войти</a>.</p><br>
   </div>
 
 

@@ -1,6 +1,5 @@
 * {box-sizing: border-box}
 html {
-    background-image: url('https://gas-kvas.com/uploads/posts/2023-02/1675453707_gas-kvas-com-p-fonovii-risunok-derevo-6.jpg'); /* Фоновый цвет и фоновый рисунок*/
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
@@ -10,13 +9,8 @@ html {
   background-size: cover;
 }
 body {
-	color: #fff; /*Цвет текста на странице*/
-}
-
-
-  .bg-image {
-    background-image: url("E:\My_Paint\src\static\fon.jpg"); /* Фоновый цвет и фоновый рисунок*/
-    background-size: cover;
+    background-image: url('fon1.jpg'); /* Фоновый цвет и фоновый рисунок*/
+    color: white;
 }
 
 

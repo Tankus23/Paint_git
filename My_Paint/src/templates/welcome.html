@@ -1,0 +1,28 @@
+{% extends "menu.html"%}
+
+{% block head %}
+
+    <link rel="stylesheet" href="{{ url_for('static', path='welcome.css') }}">
+
+{% endblock %}
+{% block content %}
+
+ <section class="section main-banner" id="top" data-section="section1">
+
+      <div class="text">
+            <h1> Графический редактор без установки плагинов и программ. </h1>
+              <a href="{{ '/pages/auth' }}" class="button">Вход</a>
+              <a href="{{ '/pages/register' }}" class="button">Регистрация</a>
+        </div>
+  </section>
+
+
+<div class="wrapper">
+    <div class="featured-news">
+
+            <div id="clear">Очистить изображение</div>
+            <div id="save">Сохранить изображение</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

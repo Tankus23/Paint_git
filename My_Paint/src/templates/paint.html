@@ -1,175 +1,126 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-<link href="paint.css" rel="stylesheet">
+{% extends "menu.html"%}
 
-</head>
-<body>
-<div class="wrapper">
-    <div class="featured-news">
-        <div id="palette"></div>
-        <canvas id='canvas' width="700" height="460">Ваш браузер устарел!</canvas>
-        <div class="button-block">
-            <label for="images" class="drop-container" id="dropcontainer">
-              <span class="drop-title">Drop files here</span>
-              or
-              <input type="file" id="images" accept="image/*" required>
-            </label>
-            <div id="clear">Очистить изображение</div>
-            <div id="save">Сохранить изображение</div>
-            <!--<div id="back_image">Загрузить изображение</div>-->
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', path='paint.css') }}">
+    <title>Paint</title>
+    <script>
+    // Выполняем по завершении загрузки страницы
+    window.addEventListener("load", function onWindowLoad() {
+        // Инициализируем переменные и генерируем палитру в элемент #palette
+            generatePalette(document.getElementById("palette"));
+            var canvas = document.getElementById("canvas");
+            var context = canvas.getContext("2d");
+            // переменные для рисования
+            context.lineCap = "round";
+            context.lineWidth = 8;
+        // вешаем обработчики на кнопки
+        // очистка изображения
+        document.getElementById("clear").onclick = function clear() {
+          context.clearRect(0, 0, canvas.width, canvas.height);
+        };
 
-            <!--<div>
-                <input type="file" id="fileinput" accept = "image/*">
-            </div>-->
-            <!--<button onclick="clear1">Очистить изображение</button>
-            <button onclick="save1">Сохранить изображение</button>
-            <button onclick="input1">Загрузить изображение</button>
-            <button><img src="E:\My_Paint\src\static\icon_add.png" alt="Добавить"
-                         style="vertical-align: middle"></button>-->
+        // сохранение изображения
+        document.getElementById("save").addEventListener('click', function(e) {
+          let canvasUrl = canvas.toDataURL("image/jpeg", 0.5);
+          console.log(canvasUrl);
+          const createEl = document.createElement('a');
+          createEl.href = canvasUrl;
+          createEl.download =  prompt("имя файла:  ");
+          createEl.click();
+          createEl.remove();
+        });
 
-        </div>
-    </div>
-</div>
+       // загрузка изображения
+        let fileInput = document.getElementById('images');
+        fileInput.addEventListener('change', function(ev) {
+           if(ev.target.files) {
+              let file = ev.target.files[0];
+              var reader  = new FileReader();
+              reader.readAsDataURL(file);
+              reader.onloadend = function (e) {
+                  var image = new Image();
+                  image.src = e.target.result;
+                  image.onload = function(ev) {
 
+                    let scale_factor = Math.min(canvas.width/image.width, canvas.height/image.height);
 
-<!--
-<div class="brush-block">
-    <div class="brushes">
-        <img src="E:\My_Paint\src\static\1.png">
-        <img src="E:\My_Paint\src\static\2.png">
-        <img src="E:\My_Paint\src\static\3.png">
-        <img src="E:\My_Paint\src\static\4.png">
-        <img src="E:\My_Paint\src\static\5.png">
-        <img src="E:\My_Paint\src\static\6.png">
-        <button type="button">
-            <img src="E:\My_Paint\src\static\icon_add.png" alt="Добавить">
-        </button>
--->
+                    let newWidth = image.width * scale_factor;
+                    let newHeight = image.height * scale_factor;
+                    let x = (canvas.width/2) - (newWidth/2)
+                    let y = (canvas.height/2) - (newHeight/2)
 
+                    context.drawImage(image, x, y, newWidth, newHeight);
+                 }
+              }
+           }
+        });
 
-<!--    <div class="effects">-->
-<!--        <select onchange="effect = this.options[this.selectedIndex].value">-->
-<!--            <option value=1 selected="selected">Спираль</option>-->
-<!--            <option value=2>Взрыв</option>-->
-<!--            <option value=3>Квадраты</option>-->
-<!--        </select>-->
-<!--    </div>-->
-<!--</div>-->
-<!--</div>-->
+        // На любое движение мыши по canvas будет выполнятся эта функция
+        canvas.onmousemove = function drawIfPressed (e) {
+          // в "e"  попадает экземпляр MouseEvent
+          var x = e.offsetX;
+          var y = e.offsetY;
+          var dx = e.movementX;
+          var dy = e.movementY;
 
-<script>
-// Выполняем по завершении загрузки страницы
-window.addEventListener("load", function onWindowLoad() {
-    // Инициализируем переменные и генерируем палитру в элемент #palette
-        generatePalette(document.getElementById("palette"));
-        var canvas = document.getElementById("canvas");
-        var context = canvas.getContext("2d");
-
-        // переменные для рисования
-        context.lineCap = "round";
-        context.lineWidth = 8;
-
-    // вешаем обработчики на кнопки
-
-    // очистка изображения
-    document.getElementById("clear").onclick = function clear() {
-      context.clearRect(0, 0, canvas.width, canvas.height);
-
-    };
-
-    // сохранение изображения
-    document.getElementById("save").addEventListener('click', function(e) {
-      let canvasUrl = canvas.toDataURL("image/jpeg", 0.5);
-      console.log(canvasUrl);
-      const createEl = document.createElement('a');
-      createEl.href = canvasUrl;
-      createEl.download =  prompt("имя файла:  ");
-      createEl.click();
-      createEl.remove();
-    });
-
-   // загрузка изображения
-
-
-    let fileInput = document.getElementById('images');
-    fileInput.addEventListener('change', function(ev) {
-       if(ev.target.files) {
-          let file = ev.target.files[0];
-          var reader  = new FileReader();
-          reader.readAsDataURL(file);
-          reader.onloadend = function (e) {
-              var image = new Image();
-              image.src = e.target.result;
-              image.onload = function(ev) {
-                 var canvas = document.getElementById('canvas');
-                 canvas.width = image.width;
-                 canvas.height = image.height;
-                 var ctx = canvas.getContext('2d');
-                  ctx.lineCap = "round";
-                    ctx.lineWidth = 8;
-                 ctx.drawImage(image,0,0, 500, 500);
-             }
+          // Проверяем зажата ли какая-нибудь кнопка мыши
+          // Если да, то рисуем
+          if (e.buttons > 0) {
+            context.beginPath();
+            context.moveTo(x, y);
+            context.lineTo(x - dx, y - dy);
+            context.stroke();
+            context.closePath();
           }
-       }
-    });
+        };
 
-    // На любое движение мыши по canvas будет выполнятся эта функция
-    canvas.onmousemove = function drawIfPressed (e) {
-      // в "e"  попадает экземпляр MouseEvent
-      var x = e.offsetX;
-      var y = e.offsetY;
-      var dx = e.movementX;
-      var dy = e.movementY;
+        function generatePalette(palette) {
+          // генерируем палитру
+          // в итоге 5^3 цветов = 125
+          for (var r = 0, max = 4; r <= max; r++) {
+            for (var g = 0; g <= max; g++) {
+              for (var b = 0; b <= max; b++) {
+                var paletteBlock = document.createElement('div');
+                paletteBlock.className = 'button';
 
-      // Проверяем зажата ли какая-нибудь кнопка мыши
-      // Если да, то рисуем
-      if (e.buttons > 0) {
-        context.beginPath();
-        context.moveTo(x, y);
-        context.lineTo(x - dx, y - dy);
-        context.stroke();
-        context.closePath();
-      }
-    };
+                paletteBlock.addEventListener('click', function changeColor(e) {
+                  context.strokeStyle = e.target.style.backgroundColor;
+                });
 
-    function generatePalette(palette) {
-      // генерируем палитру
-      // в итоге 5^3 цветов = 125
-      for (var r = 0, max = 4; r <= max; r++) {
-        for (var g = 0; g <= max; g++) {
-          for (var b = 0; b <= max; b++) {
-            var paletteBlock = document.createElement('div');
-            paletteBlock.className = 'button';
+                paletteBlock.addEventListener('contextmenu', function changeColor(e) {
+                  canvas.style.background = e.target.style.backgroundColor;
+                });
 
-            paletteBlock.addEventListener('click', function changeColor(e) {
-              context.strokeStyle = e.target.style.backgroundColor;
-            });
+                paletteBlock.oncontextmenu = function(){return false;};
 
-            paletteBlock.addEventListener('contextmenu', function changeColor(e) {
-              canvas.style.background = e.target.style.backgroundColor;
-            });
+                paletteBlock.style.backgroundColor = (
+                  'rgb(' + Math.round(r * 255 / max) + ", "
+                  + Math.round(g * 255 / max) + ", "
+                  + Math.round(b * 255 / max) + ")"
+                );
 
-            paletteBlock.oncontextmenu = function(){return false;};
-
-            paletteBlock.style.backgroundColor = (
-              'rgb(' + Math.round(r * 255 / max) + ", "
-              + Math.round(g * 255 / max) + ", "
-              + Math.round(b * 255 / max) + ")"
-            );
-
-            palette.appendChild(paletteBlock);
+                palette.appendChild(paletteBlock);
+              }
+            }
           }
         }
-      }
-    }
-});
-
-
-
-
-</script>
-</body>
-</html>
+    });
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="wrapper">
+        <div class="featured-news">
+            <div id="palette"></div>
+            <canvas id='canvas' width="600" height="600">Ваш браузер устарел!</canvas>
+            <div class="button-block">
+                <label for="images" class="drop-container" id="dropcontainer">
+                    <span class="drop-title">Перетаскивайте файлы сюда</span>
+                    или
+                    <input type="file" id="images" accept="image/*" required>
+                </label>
+                <div id="clear">Очистить изображение</div>
+                <div id="save">Сохранить изображение</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -8,7 +8,7 @@ picture = Table(
     "picture",
     metadata,
     Column("id", Integer, primary_key=True),
-    Column("id_user", Integer,ForeignKey(user.c.id)),
+    Column("id_user", Integer, ForeignKey(user.c.id)),
     Column("date", TIMESTAMP),
     Column("image_address", String),
 )

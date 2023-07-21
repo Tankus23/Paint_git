@@ -8,15 +8,23 @@
 </head>
 <body>
 <nav class="one">
-  <ul>
-    <li><a href="{{ '/pages/welcome' }}"><i class="fa fa-home fa-fw"></i>Главная</a></li>
-    <li><a href="#">Мой аккаунт</a></li>
-    <li><a href="{{ '/pages/paint' }}">Рисовалка</a></li>
-    <li><a href="#">Выйти</a></li>
-  </ul>
+    <ul>
+        {% if user_active %}
+        <!-- Элементы для авторизованного пользователя -->
+        <li><a href="{{ '/paint/' }}">Рисовалка</a></li>
+        <li><a href="#" onclick="logout()">Выйти</a></li>
+        {% else %}
+        <!-- Элементы для неавторизованного пользователя -->
+        <li><a href="{{ '/welcome' }}"><i class="fa fa-home fa-fw"></i>Главная</a></li>
+<!--        <li><a href="{{ '/login' }}">Войти</a></li>-->
+<!--        <li><a href="{{ '/register' }}">Зарегистрироваться</a></li>-->
+        {% endif %}
+        <li><a href="{{ '/profile/' }}">Мой аккаунт</a></li>
+    </ul>
 </nav>
 <div id="content">
-        {% block content %}{% endblock %}
-    </div>
+    {% block content %}{% endblock %}
+</div>
+<script src="/static/logout.js"></script>
 </body>
 </html>

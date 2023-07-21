@@ -8,3 +8,6 @@ class PicturesCreate(BaseModel):
     id_user: int
     date: datetime
     image_address: str
+
+    class Config:
+        orm_mode = True

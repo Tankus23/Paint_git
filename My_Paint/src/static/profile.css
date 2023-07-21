@@ -5,17 +5,24 @@ body {
 /* coding with nick */
 
 .container{
- width: 100%;
-    margin-top:185px ;
     text-transform: uppercase;
-    text-align: center;
+    text-align: left;
     color: white;
+    padding: 20px;
 }
-.container h1{s
-    font-size: 62px;
+.container h1{
+    color: white;
+    font-size: 40px;
     font-family: 'montserrat', sans-serif ;
-    font-weight: 700px;
+    font-weight: 70px;
     margin: 14px 0px;
+}
+.button{
+
+}
+.button:hover{
+    background-color: white;
+    color: black;
 }
 .text{
     width: 100%;
@@ -52,7 +59,7 @@ body {
     font-weight: bold;
     text-transform: uppercase;
     line-height: 40px;
-    width: 150px;
+    width: 300px;
     margin-top: 25px;
     border: 3px solid white;
     cursor: pointer;

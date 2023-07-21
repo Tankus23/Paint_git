@@ -16,6 +16,25 @@ body {
   color: #eee;
 }
 
+.button {
+width: 100%;
+    background-color: #0e6b42; /* Green */
+      color: white;
+
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  margin: 5px 0;
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 20px;
+  text-decoration: none; /* remove underline from anchors */}
+
+  .button:hover {
+  background-color: #118250;
+  color: white;
+}
 /* style inputs and link buttons */
 input,
 .btn {

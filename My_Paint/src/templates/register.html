@@ -1,36 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends "menu.html" %}
+
+{% block head %}
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="{{ url_for('static', path='register.css') }}">
-</head>
-<body >
-<form>
-  <div class="container">
-    <h1>Регистрация</h1>
-    <p>Пожалуйста заполните эту форму для создания аккаунта</p>
-    <hr>
+{% endblock %}
 
-    <label><b>Email</b></label>
-    <input type="text" placeholder="Введите Email" name="email" required>
+{% block content %}
 
-    <label><b>Имя пользователя</b></label>
-    <input type="text" placeholder="Введите имя пользователя" name="email" required>
+<div class="container">
+    <div class="row justify-content-center">
+        <h1>Регистрация</h1>
+        <p>Пожалуйста заполните эту форму для создания аккаунта</p>
+        <hr>
+            <form id="registration-form">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Введите имя пользователя" id="username" name="username" required>
+                    <div class="error-message" id="username-error"></div>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Введите Email" id="email" name="email" required>
+                    <div class="error-message" id="email-error"></div>
+                </div>
 
-    <label><b>Пароль</b></label>
-    <input type="password" placeholder="Введите пароль" name="psw" required>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Введите пароль" id="password" name="password" required>
+                </div>
+                <button type="submit" class="registerbtn" >Зарегистрироваться</button>
+                <p>Уже есть аккаунт? <a href="{{ '/login' }}">Войти</a>.</p><br>
+            </form>
+        </div>
+    </div>
+    <script src="/static/registration.js"></script>
+</div>
 
-    <label><b>Повторите пароль</b></label>
-    <input type="password" placeholder="Повторите Password" name="psw-repeat" required>
-    <hr>
-
-    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-    <button type="submit" class="registerbtn">Регистрировать</button>
-    <p>Уже есть аккаунт? <a href="{{ '/pages/auth' }}">Войти</a>.</p><br>
-  </div>
-
-
-</form>
-</body>
-</html>
+{% endblock %}

@@ -1,5 +1,6 @@
 body {
-    background: #3b4d3a;
+   /* background: #3b4d3a;*/
+       background-image: url('fon1.jpg'); /* Фоновый цвет и фоновый рисунок*/
     color: #e4ecfc;
 }
 .wrapper {
@@ -101,12 +102,14 @@ body {
   border: 2px dashed #555;
   color: #e4ecfc;
   cursor: pointer;
+  background-color: rgba(5, 39, 24, 0.6);
+
   transition: background .2s ease-in-out, border .2s ease-in-out;
 }
 
 .drop-container:hover,
 .drop-container.drag-active {
-  background-color: #052718;
+  background-color: rgba(5, 39, 24, 0.9);
 color:e4ecfc
   border-color: #111;
 }
@@ -114,6 +117,7 @@ color:e4ecfc
 .drop-container:hover .drop-title,
 .drop-container.drag-active .drop-title {
   color: #e4ecfc;
+   background-color: #052718;
 }
 
 .drop-title {
